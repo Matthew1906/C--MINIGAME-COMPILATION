@@ -1,0 +1,57 @@
+ +===========================+=======+=========+
+ | Name                      | State | Count   |
+ +===========================+=======+=========+
+ | Annie                     | AK    | 394     |
+ | Annie                     | AL    | 34660   |
+ | Annie                     | AR    | 6557    |
+ | Annie                     | AZ    | 1423    |
+ | Annie                     | CA    | 8786    |
+ | Annie                     | CO    | 1187    |
+ | Annie                     | CT    | 608     |
+ | Annie                     | DE    | 15      |
+ | Annie                     | FL    | 9699    |
+ | Annie                     | GA    | 35742   |
+ | Annie                     | HI    | 800     |
+ | Annie                     | IA    | 604     |
+ | Annie                     | ID    | 330     |
+ | Annie                     | IL    | 3610    |
+ | Annie                     | IN    | 1190    |
+ | Annie                     | KS    | 666     |
+ | Annie                     | KY    | 3304    |
+ | Annie                     | LA    | 11349   |
+ | Annie                     | MA    | 2047    |
+ | Annie                     | MD    | 2163    |
+ | Annie                     | ME    | 809     |
+ | Annie                     | MI    | 2321    |
+ | Annie                     | MN    | 1273    |
+ | Annie                     | MO    | 2344    |
+ | Annie                     | MS    | 26703   |
+ | Annie                     | MT    | 279     |
+ | Annie                     | NC    | 32034   |
+ | Annie                     | ND    | 320     |
+ | Annie                     | NE    | 265     |
+ | Annie                     | NH    | 179     |
+ | Annie                     | NJ    | 1394    |
+ | Annie                     | NM    | 1358    |
+ | Annie                     | NV    | 107     |
+ | Annie                     | NY    | 4723    |
+ | Annie                     | OH    | 2804    |
+ | Annie                     | OK    | 2284    |
+ | Annie                     | OR    | 576     |
+ | Annie                     | PA    | 4341    |
+ | Annie                     | RI    | 235     |
+ | Annie                     | SC    | 21674   |
+ | Annie                     | SD    | 215     |
+ | Annie                     | TN    | 12268   |
+ | Annie                     | TX    | 20263   |
+ | Annie                     | UT    | 1375    |
+ | Annie                     | VA    | 11627   |
+ | Annie                     | VT    | 12      |
+ | Annie                     | WA    | 1288    |
+ | Annie                     | WI    | 892     |
+ | Annie                     | WV    | 1182    |
+ | Annie                     | WY    | 33      |
+ | Annie                     | DC    | 615     |
+ +===========================+=======+=========+
+  Grand Total: 280927 people
+
