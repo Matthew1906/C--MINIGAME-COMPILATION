@@ -1,0 +1,17 @@
+
+TO BE FIXED: 
+- Tic tac toe:
+	a. update printed message (add space)
+	b. add leaderboard (might be necessary)
+- Hangman:
+	a. update printed message (add space, etc.)
+	b. add leaderboard (might be necessary too)
+- Monopoly:
+	a. update map (if possible, to erase traces of NAR Training-> prevent plagiarism, although technically it already is)
+
+TO BE MADE:
+- Handler Book
+- couple vinder
+- othello
+- dijkstra stars
+- chasing goat

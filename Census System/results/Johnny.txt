@@ -1,0 +1,54 @@
+ +===========================+=======+=========+
+ | Name                      | State | Count   |
+ +===========================+=======+=========+
+ | Johnny                    | AK    | 269     |
+ | Johnny                    | AL    | 17153   |
+ | Johnny                    | AR    | 9606    |
+ | Johnny                    | AZ    | 4549    |
+ | Johnny                    | CA    | 30183   |
+ | Johnny                    | CO    | 2778    |
+ | Johnny                    | CT    | 710     |
+ | Johnny                    | DE    | 166     |
+ | Johnny                    | FL    | 12660   |
+ | Johnny                    | GA    | 22373   |
+ | Johnny                    | HI    | 240     |
+ | Johnny                    | IA    | 1051    |
+ | Johnny                    | ID    | 546     |
+ | Johnny                    | IL    | 8148    |
+ | Johnny                    | KS    | 2296    |
+ | Johnny                    | KY    | 9106    |
+ | Johnny                    | LA    | 11428   |
+ | Johnny                    | MA    | 1051    |
+ | Johnny                    | MD    | 1607    |
+ | Johnny                    | ME    | 57      |
+ | Johnny                    | MN    | 773     |
+ | Johnny                    | MO    | 6150    |
+ | Johnny                    | MS    | 13202   |
+ | Johnny                    | MT    | 294     |
+ | Johnny                    | NC    | 18979   |
+ | Johnny                    | ND    | 182     |
+ | Johnny                    | NE    | 966     |
+ | Johnny                    | NH    | 5       |
+ | Johnny                    | NJ    | 2458    |
+ | Johnny                    | NM    | 4937    |
+ | Johnny                    | NV    | 695     |
+ | Johnny                    | NY    | 9595    |
+ | Johnny                    | OH    | 7090    |
+ | Johnny                    | OK    | 9543    |
+ | Johnny                    | OR    | 1317    |
+ | Johnny                    | PA    | 2645    |
+ | Johnny                    | RI    | 63      |
+ | Johnny                    | SC    | 11706   |
+ | Johnny                    | SD    | 191     |
+ | Johnny                    | TN    | 15286   |
+ | Johnny                    | TX    | 44475   |
+ | Johnny                    | UT    | 936     |
+ | Johnny                    | VA    | 6387    |
+ | Johnny                    | WA    | 2168    |
+ | Johnny                    | WI    | 950     |
+ | Johnny                    | WV    | 4395    |
+ | Johnny                    | WY    | 231     |
+ | Johnny                    | DC    | 892     |
+ +===========================+=======+=========+
+  Grand Total: 302488 people
+
