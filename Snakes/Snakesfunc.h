@@ -266,13 +266,13 @@ void snakes_startgame(){
 	do{
 		system("cls");
 		endFlag = 1;
-		printf(" Enter your name: ");
+		printf(" Enter your name [3 - 25 characters]: ");
 		scanf("%[^\n]", name);
 		getchar();
 		int len = strlen(name);
-		if(len<3 || len>50){
+		if(len<3 || len>25){
 			endFlag = 0;
-			printf(" Name length must be between 3 - 50 characters!");
+			printf(" Name length must be between 3 - 25 characters!");
 			getchar();
 		}
 		else{
@@ -291,7 +291,7 @@ void snakes_startgame(){
 	FILE *fscore = fopen(".\\Snakes\\SnakeLeaderboard.txt", "a");
 	fprintf(fscore, "%s#%d\n", name, snakes_Score);
 	fclose(fscore);
-	printf("Press enter to continue...");
+	printf(" Press enter to continue...");
 	getchar();
 	return;
 }
@@ -317,12 +317,22 @@ void snakes_leaderboard(){
 		snakes_push(names, scores);
 	}
 	fclose(fscore);
-	printf(" Current Leaderboard:\n");
-	struct snakes_score *tempScore = snakes_headScore;
-	while(tempScore){
-		printf(" %-50s - %d \n", tempScore->name, tempScore->score);
-		tempScore = tempScore->next;
+	if(!snakes_headScore){
+		printf(" There is no data!\n");
 	}
+	else{
+		printf(" Current Leaderboard:\n\n");
+		printf(" +---------------------------+-------+\n");
+		printf(" | Name                      | Score |\n");
+		printf(" +---------------------------+-------+\n");
+		struct snakes_score *tempScore = snakes_headScore;
+		while(tempScore){
+			printf(" | %-25s | %-5d |\n", tempScore->name, tempScore->score);
+			printf(" +---------------------------+-------+\n");
+			tempScore = tempScore->next;
+		}
+	}
+	
 	snakes_popAll();
 	printf("Press enter to continue..");
 	getchar();

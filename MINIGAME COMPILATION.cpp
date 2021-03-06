@@ -99,7 +99,7 @@ void subMenu_selfTraining(){
 				break;
 			case 2:
 				hangman_game(); // Algorithm Bootcamp: Final Project (team) -> also improved and altered
-				// implements file processing, repetition and functions, and string manipulation
+				// implements linked lists, padding, file processing, repetition and functions, and string manipulation
 				break;
 			case 3:
 				tictactoe_game(); // improved tictactoe with arrow key to select
@@ -111,7 +111,7 @@ void subMenu_selfTraining(){
 				break;
 			case 5:
 				snakes_game();
-				// implements file processing, linked lists, game loop, accepting key inputs, and altering consoles.
+				// implements file processing, linked lists, padding, game loop, accepting key inputs, and altering consoles.
 				break;
 			default:
 				return;

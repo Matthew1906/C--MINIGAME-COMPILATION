@@ -17,6 +17,60 @@ void hangman_loseMenu();
 void hangman_winMenu();
 void hangman_instructions();
 
+struct hangman_score{
+	char name[255];
+	int win, loss;
+	struct hangman_score *next;
+}*hangman_headScore = NULL, *hangman_tailScore = NULL;
+
+void hangman_push(char *name, int win, int loss){
+	struct hangman_score *temp = (struct hangman_score*)malloc(sizeof(hangman_score));
+	strcpy(temp->name, name);
+	temp->win = win;
+	temp->loss = loss;
+	temp->next = NULL;
+	if(hangman_headScore == NULL){
+		hangman_headScore = hangman_tailScore = temp;
+	}
+	else if(win>hangman_headScore->win){
+		temp-> next = hangman_headScore;
+		hangman_headScore = temp;
+	}
+	else if(win<hangman_tailScore->win){
+		hangman_tailScore -> next = temp;
+		hangman_tailScore = temp;
+		hangman_tailScore -> next = NULL;
+	}
+	else{
+		hangman_score *currScore = hangman_headScore;
+		while(currScore->next != NULL && currScore->next->win > win){
+			currScore = currScore->next;
+		}
+		temp->next = currScore->next;
+		currScore->next = temp;
+	}
+}
+
+void hangman_popHead(){
+	if(!hangman_headScore){
+		return;
+	}
+	else if(hangman_headScore == hangman_tailScore){
+		hangman_headScore = hangman_tailScore = NULL;
+	}
+	else{
+		struct hangman_score *currScore = hangman_headScore;
+		hangman_headScore = currScore->next;
+		free(currScore);	
+	}
+}
+
+void hangman_popAll(){
+	while(hangman_headScore){
+		hangman_popHead();
+	}
+}
+
 int hangman_counter = 0;
 int hangman_wordcounter = 0;
 int hangman_test(char c, char *kata, char *tanya){
@@ -152,11 +206,71 @@ void hangman_startgame(){
 		}
 	}
 	printf("\n Number of Victories: %d\n", victory);
-	printf(" Number of Losses: %d\n", loss);
+	printf(" Number of Losses: %d\n\n", loss);
+	char choice[5];
+	bool saveFlag = true;
+	do{
+		saveFlag = false;
+		printf(" Do you want to save your streak?[Yes|No]\n");
+		printf(" >> ");
+		scanf("%s", choice);
+		getchar();
+		if(strcmpi(choice,"yes")==0 || strcmpi(choice,"no")==0){
+			saveFlag = true;
+		}
+	}while(!saveFlag);
+	if(strcmpi(choice,"yes")==0){
+		char name[255];
+		do{
+			saveFlag = true;
+			printf(" Please enter your name [3-25 characters]: ");
+			scanf("%[^\n]", name);
+			getchar();
+			int len = strlen(name);
+			if(len<3 || len>25){
+				saveFlag=false;
+			}
+		}while(!saveFlag);
+		FILE *fscore = fopen(".\\Hangman\\HangmanLeaderboard.txt","a");
+		fprintf(fscore, "%s#%d#%d\n", name, victory, loss);
+		fclose(fscore);
+		printf(" Save completed!\n");
+	}
+	printf(" Press enter to continue...");
 	getchar();
-	hangman_cont();
 	return;
 }
+
+void hangman_leaderboard(){
+	system("cls");
+	FILE *fscore = fopen(".\\Hangman\\HangmanLeaderboard.txt", "r");
+	char names[255];
+	int win, loss;
+	while(fscanf(fscore, "%[^#]#%d#%d\n", names, &win, &loss)!=EOF){
+		hangman_push(names, win,loss);
+	}
+	fclose(fscore);
+	if(!hangman_headScore){
+		printf(" There is no data!\n");
+	}
+	else{
+		printf(" Current Leaderboard:\n\n");
+		struct hangman_score *tempScore = hangman_headScore;
+		printf(" +---------------------------+-----+------+\n");
+		printf(" | Name                      | Win | Loss |\n");
+		printf(" +---------------------------+-----+------+\n");
+		while(tempScore){
+			printf(" | %-25s | %-3d | %-3d  |\n", tempScore->name, tempScore->win, tempScore->loss);
+			printf(" +---------------------------+-----+------+\n");
+			tempScore = tempScore->next;
+		}
+	}
+	hangman_popAll();
+	printf("Press enter to continue..");
+	getchar();
+	return;
+}
+
 void hangman_game(){
 	char hangman_menu ;
 	do{
@@ -166,7 +280,8 @@ void hangman_game(){
 			printf("\n");
 			printf("\t\t\t\t\t\t\t1. Start Game\n");
 			printf("\t\t\t\t\t\t\t2. Instructions\n");
-			printf("\t\t\t\t\t\t\t3. Exit\n");
+			printf("\t\t\t\t\t\t\t3. Leaderboard\n");
+			printf("\t\t\t\t\t\t\t4. Exit\n");
 			printf("\t\t\t\t\t\t\t>> ");
 			hangman_menu=getch();
 			printf("%c\n", hangman_menu);
@@ -179,6 +294,7 @@ void hangman_game(){
 				hangman_instructions();
 				break;
 			case 3:
+				hangman_leaderboard();
 				break;
 		}
 	}while(hangman_menu-'0'!=3);
