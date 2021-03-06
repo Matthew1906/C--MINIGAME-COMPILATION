@@ -6,21 +6,21 @@
 int monopoly_index, monopoly_index2, monopoly_numplayer;
 char monopoly_map[105][205]={0};
 
-void monopoly_delay (int numsec){ // untuk dilasi waktu
+void monopoly_delay (int numsec){ // time dilation
 	clock_t start_time = clock();
 	while(clock()<start_time+numsec*1000);
 }
 struct monopoly_player{
-	char name[10]; //nama pemain
-	char icon; // simbol pemain
-	int money; // uang pemain
-	int assets; // kepemilikan pemain
-	int row1; // posisi pemain(dari sumbu y)
-	int col1; // posisi pemain (dari sumbu x)
-	bool lose = false; // menentukan keuangan pemain( jika bangkrut, maka true)
-	int location; // menentukan lokasi pemain(0-27)
-	bool angel = false ;//ownership of angelcard.
-	bool freeze = false; //determine if the player can move
+	char name[10]; //player name
+	char icon; // player symbol
+	int money; // player money
+	int assets; // player assets
+	int row1; // player position in y axis
+	int col1; // player position in x axis
+	bool lose = false; // player status (win/lose)
+	int location; // player block location
+	bool angel = false ;// ownership of angelcard.
+	bool freeze = false; // determine if the player can move
 	bool travel = false; // determine if the player can travel
 	int ownership[28]; // location of owned islands
 };
@@ -32,9 +32,9 @@ struct monopoly_block{
 	int owner = -1;
 	int multiplier = 1;
 };
-// FUNGSI UNTUK PRINT PETA GAME(DAN KONDISI PESERTA SAAT SETIAP PERGERAKAN)
+// print map function
 void monopoly_currmap(struct monopoly_player *players, struct monopoly_block *blocks, int curr){
-	//MENGURUTKAN PESERTA DI LEADERBOARD
+	// sort players in the leaderboard (descending based on total money+assets)
 	int sort[monopoly_numplayer];
 	for(int i=0;i<monopoly_numplayer;i++){
 		sort[i] = i;
@@ -48,9 +48,10 @@ void monopoly_currmap(struct monopoly_player *players, struct monopoly_block *bl
 			}
 		}
 	}
-	//PRINT PETA
+	//PRINT MAP
+	printf("\n");
 	for(int i=0;i<monopoly_index;i++){
-		printf("%s", monopoly_map[i]);
+		printf(" %s", monopoly_map[i]);
 		// PRINT LEADERBOARD
 		if(i==2){
 			printf(" Leaderboard");
@@ -73,6 +74,7 @@ void monopoly_currmap(struct monopoly_player *players, struct monopoly_block *bl
 		else if(i==9 && monopoly_numplayer>3){
 			printf(" | 4. %-8s %5d K (%5d K + %5d K)|", players[sort[3]].name, players[sort[3]].money+players[sort[3]].assets, players[sort[3]].money, players[sort[3]].assets);
 		}
+		// print BLOCK INFO
 		else if(i==monopoly_numplayer+9){
 			printf(" Block Information");
 		}
@@ -131,6 +133,7 @@ void monopoly_currmap(struct monopoly_player *players, struct monopoly_block *bl
 			}
 			else printf(" |                             |");	
 		}
+		// PRINT CURRENT PLAYER INFO
 		else if(i==monopoly_numplayer+24){
 			printf(" Current Player");
 		}
@@ -158,7 +161,7 @@ void monopoly_currmap(struct monopoly_player *players, struct monopoly_block *bl
 		printf("\n");
 	}	
 }
-// FUNGSI UNTUK MEMERIKSA APAKAH SEMUA PEMAIN TIDAK BANGKRUT
+// CHECK EACH PLAYERS CONDITION (WIN/LOSE/STASIS)
 int monopoly_cekwin(struct monopoly_player *players){
 	for(int i=0;i<monopoly_numplayer;i++){
 		if(players[i].lose == true){
@@ -168,7 +171,7 @@ int monopoly_cekwin(struct monopoly_player *players){
 	return 1;
 }
 
-// FUNGSI UNTUK MENCARI DAN MEMINDAHKAN PION PEMAIN
+// MOVE PLAYER'S POSITION
 void monopoly_find(int i, struct monopoly_player *players){
 	monopoly_map[players[i].row1][players[i].col1]=' ';
 	if(i%2==0)players[i].col1 = 5;
@@ -210,17 +213,18 @@ void monopoly_find(int i, struct monopoly_player *players){
 	monopoly_map[players[i].row1][players[i].col1]= players[i].icon;
 }
 
+// PLAYER'S ACTIVITY BASED ON THE BLOCK THEY ENTERED
 void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_block*blocks){
 	if(strcmp(blocks[players[curr].location].info, "island")==0){
 		// EMPTY ISLAND
 		if(blocks[players[curr].location].owner==-1 && players[curr].money>=blocks[players[curr].location].cost){
 			char pilihan[4];
 			do{
-				printf(" Do you want to buy this island for %d K [ Yes | No ]? ", blocks[players[curr].location].cost);
+				printf("  Do you want to buy this island for %d K [ Yes | No ]? ", blocks[players[curr].location].cost);
 				scanf("%s", pilihan);
 				getchar();
-			}while(strcmp(pilihan,"Yes")!=0 && strcmp(pilihan,"No")!=0);
-			if(strcmp(pilihan,"Yes")==0){
+			}while(strcmpi(pilihan,"Yes")!=0 && strcmpi(pilihan,"No")!=0);
+			if(strcmpi(pilihan,"Yes")==0){
 				players[curr].money-=blocks[players[curr].location].cost;
 				blocks[players[curr].location].owner= curr;
 				players[curr].assets+=blocks[players[curr].location].cost;
@@ -254,22 +258,22 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 			}
 		}
 		else if(blocks[players[curr].location].owner==-1 && players[curr].money<blocks[players[curr].location].cost){
-			printf(" You don't have enough money!\n");
+			printf("  You don't have enough money!\n");
 			}
 		//OCCUPIED ISLAND
 		else if(blocks[players[curr].location].owner!=-1){
-			printf(" Oops, you landed on %s's land~ You need to pay a rent!\n", players[blocks[players[curr].location].owner].name);
-			printf(" Rent : %d K\n", blocks[players[curr].location].multiplier*((3*blocks[players[curr].location].cost)/2));
+			printf("  Oops, you landed on %s's land~ You need to pay a rent!\n", players[blocks[players[curr].location].owner].name);
+			printf("  Rent : %d K\n", blocks[players[curr].location].multiplier*((3*blocks[players[curr].location].cost)/2));
 			int rent = 	blocks[players[curr].location].multiplier*((3*blocks[players[curr].location].cost)/2), rent_flag=0;	
 			if(players[curr].angel==true){
 				char pilihan1[10];
 					do{
-						printf(" Use Angel Card [ Yes | No ]?");
+						printf("  Use Angel Card [ Yes | No ]?");
 						scanf("%s", pilihan1);
-					}while(strcmp(pilihan1,"Yes")!=0 && strcmp(pilihan1,"No")!=0);
-					if(strcmp(pilihan1, "Yes")==0){
+					}while(strcmpi(pilihan1,"Yes")!=0 && strcmpi(pilihan1,"No")!=0);
+					if(strcmpi(pilihan1, "Yes")==0){
 						players[curr].angel = false;
-						printf(" Angel Card has been used!\n");
+						printf("  Angel Card has been used!\n");
 						rent_flag=1;
 					}	
 			}
@@ -290,10 +294,10 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 						}
 						int losing1;
 						do{
-							printf(" Your money isn't enough to pay rent!\n");
-							printf(" 1. Sell Island\n");
-							printf(" 2. Bankrupt\n");
-							printf(" Choose [ 1 | 2 ]: ");
+							printf("  Your money isn't enough to pay rent!\n");
+							printf("  1. Sell Island\n");
+							printf("  2. Bankrupt\n");
+							printf("  Choose [ 1 | 2 ]: ");
 							scanf("%d", &losing1);
 						}while(losing1< 1 || losing1> 2);
 						if(losing1== 1){
@@ -306,16 +310,16 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 										index++;
 									}
 								}
-								printf(" Choose the island you want to sell!\n");
+								printf("  Choose the island you want to sell!\n");
 								int sell_flag=0;
 								int sell;
 								do{
 									sell_flag=0;
 									for(int i=0;i<index;i++){
-										printf(" %d. %s - %d\n", players[curr].ownership[i], blocks[players[curr].ownership[i]].name, blocks[players[curr].ownership[i]].cost);
+										printf("  %d. %s - %d\n", players[curr].ownership[i], blocks[players[curr].ownership[i]].name, blocks[players[curr].ownership[i]].cost);
 									}
-									printf(" 0. Back\n");
-									printf(" >> ");
+									printf("  0. Back\n");
+									printf("  >> ");
 									scanf("%d", &sell);
 									getchar();
 									if(sell==0)sell_flag = 1;
@@ -329,7 +333,7 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 									}
 								}while(sell_flag==0);
 								if(sell_flag==1){
-									printf(" %s are bankrupt. The game will be ended.\n", players[curr].name);
+									printf("  %s are bankrupt. The game will be ended.\n", players[curr].name);
 									players[curr].lose = true;
 									players[curr].money = 0;
 									players[curr].assets = 0;
@@ -370,14 +374,14 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 							players[curr].money = currmoney-rent;							
 						}
 						else{
-							printf(" %s are bankrupt. The game will be ended.\n", players[curr].name);
+							printf("  %s are bankrupt. The game will be ended.\n", players[curr].name);
 							players[curr].lose = true;
 							players[curr].money = 0;
 							players[curr].assets = 0;
 						}
 					}
 					else{
-						printf(" %s are bankrupt. The game will be ended.\n", players[curr].name);
+						printf("  %s are bankrupt. The game will be ended.\n", players[curr].name);
 						players[curr].lose = true;
 					}
 				}
@@ -391,14 +395,14 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 		int chanceit = (rand()%10)+1;
 		if(chanceit%5==0){
 			players[curr].angel = true;
-			printf(" Congratulations~ You got an angel card! (^v^)/\n");
+			printf("  Congratulations~ You got an angel card! (^v^)/\n");
 			getchar();
 		}
 	}
 	// tax
 	else if(players[curr].location== 26){
 		int tax = (players[curr].money+ players[curr].assets)/5;
-		printf(" %d K will be taken for tax!\n", tax);
+		printf("  %d K will be taken for tax!\n", tax);
 		if(players[curr].money>=tax){
 			players[curr].money-=tax;
 		}
@@ -414,24 +418,24 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 			tax -= players[curr].money;
 			int losing;
 			do{
-				printf(" Your money isn't enough to pay tax!\n");
-				printf(" 1. Sell Island\n");
-				printf(" 2. Bankrupt\n");
-				printf(" Choose [ 1 | 2 ]: ");
+				printf("  Your money isn't enough to pay tax!\n");
+				printf("  1. Sell Island\n");
+				printf("  2. Bankrupt\n");
+				printf("  Choose [ 1 | 2 ]: ");
 				scanf("%d", &losing);
 			}while(losing!= 1 && losing!=2);
 			if(losing==1){
 					int currmoney =0;
 					while(currmoney<tax){
-						printf(" Choose the island you want to sell!\n");
+						printf("  Choose the island you want to sell!\n");
 						int sell_flag=0;
 						int sell;
 						do{
 							for(int i=0;i<index;i++){
-								printf(" %d. %s - %d\n", players[curr].ownership[i], blocks[players[curr].ownership[i]].name, blocks[players[curr].ownership[i]].cost);
+								printf("  %d. %s - %d\n", players[curr].ownership[i], blocks[players[curr].ownership[i]].name, blocks[players[curr].ownership[i]].cost);
 							}
-							printf(" 0. Back\n");
-							printf(">> ");
+							printf("  0. Back\n");
+							printf(" >> ");
 							scanf("%d", &sell);
 							if(sell==0)sell_flag = 1;
 							for(int i=0;i<index;i++){
@@ -442,7 +446,7 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 							}
 						}while(sell_flag==0);
 						if(sell_flag==1){
-							printf(" %s are bankrupt. The game will be ended.\n", players[curr].name);
+							printf("  %s are bankrupt. The game will be ended.\n", players[curr].name);
 							players[curr].lose = true;
 							players[curr].money = 0;
 							players[curr].assets = 0;
@@ -485,14 +489,14 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 					tax = 0;
 				}
 				else if(losing==2){
-					printf(" %s are bankrupt. The game will be ended.\n", players[curr].name);
+					printf("  %s are bankrupt. The game will be ended.\n", players[curr].name);
 					players[curr].lose = true;
 					players[curr].money = 0;
 					players[curr].assets = 0;
 				}
 			}
 		else{
-			printf(" %s are bankrupt. The game will be ended.\n", players[curr].name);
+			printf("  %s are bankrupt. The game will be ended.\n", players[curr].name);
 			players[curr].lose = true;
 			players[curr].money = 0;
 			players[curr].assets = 0;
@@ -500,8 +504,8 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 	}
 	// jail
 	else if(players[curr].location == 7){
-		printf(" 1 more turn, and you'll be out of jail\n");
-		printf(" This message will disappear after 1 sec");
+		printf("  1 more turn, and you'll be out of jail\n");
+		printf("  This message will disappear after 1 sec");
 		players[curr].freeze = true;
 		monopoly_delay(1);
 		system("cls");
@@ -509,7 +513,7 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 	}
 	// festival
 	else if(players[curr].location == 14){
-		printf(" Choose the island where you will hold the festival:\n");
+		printf("  Choose the island where you will hold the festival:\n");
 		int index = 0;	
 		for(int i=0;i<28;i++){
 			if(blocks[i].owner==curr){
@@ -523,10 +527,10 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 			getchar();
 			for(int i=0;i<index;i++){
 				int before = blocks[players[curr].ownership[i]].multiplier*((3*blocks[players[curr].ownership[i]].cost)/2);
-				printf(" %d. %s |  Rent Price %d -> %d\n", players[curr].ownership[i], blocks[players[curr].ownership[i]].name, before, 2*before);
+				printf("  %d. %s |  Rent Price %d -> %d\n", players[curr].ownership[i], blocks[players[curr].ownership[i]].name, before, 2*before);
 			}
-			printf(" 0. Cancel\n");
-			printf(" >> ");
+			printf("  0. Cancel\n");
+			printf("  >> ");
 			scanf("%d", &host);
 			if(host==0)host_flag = 1;
 			for(int i=0;i<index;i++){
@@ -538,7 +542,7 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 		}while(host_flag==0);
 		if(host_flag==2){
 			if(blocks[host].multiplier<=4)blocks[host].multiplier*=2;
-			printf(" Yay! The chosen block rent price has been doubled!\n");
+			printf("  Yay! The chosen block rent price has been doubled!\n");
 			getchar();
 		}
 	}
@@ -547,7 +551,7 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 		players[curr].travel = true;
 		int travel;
 		do{
-			printf(" Choose any block that you want to go [0-27]: ");
+			printf("  Choose any block that you want to go [0-27]: ");
 			scanf("%d", &travel);
 		}while(travel< 0 || travel>27);
 		//instantly travel, but the player can do what he/she wants in the next round
@@ -556,21 +560,21 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 		monopoly_find(curr, players);
 	}
 }
-//FUNGSI MENU PERMAINAN SECARA KESELURUHAN
+// GAME LOOP
 void monopoly_gamemenu(struct monopoly_player* players, struct monopoly_block *blocks){
 	system("cls");
-	// SETUP KONDISI AWAL
+	// SETUP
 	for(int i=0;i<monopoly_numplayer;i++){
 		monopoly_map[players[i].row1][players[i].col1] = players[i].icon;
-		players[i].money = 1000; // UANG AWAL 1000 K
-		players[i].location = 0; // PEMAIN BERADA PADA BLOK 0
-		players[i].assets = 0; // ASSET (KEPEMILIKAN AWAL) = 0
+		players[i].money = 1000; // INITIAL MONEY 1000 K
+		players[i].location = 0; // PLAYERS ARE IN GO BLOCK (NUMBER 0)
+		players[i].assets = 0; // ASSETS = 0
 	}
 	int check= monopoly_cekwin(players), curr=0, round=1, flag=1;
 	monopoly_currmap(players, blocks, curr);
-	//PERMAINAN DIMULAI
+	//START GAME
 	do{
-		// MENGHITUNG ROUND(CURR = PESERTA SAAT ITU(DINOMORI DARI 0), JIKA CURR SUDAH MELEMBIHI INDEKS PESERTA, MAKA ROUND+++, CURR KEMBALI 0
+		// CALCULATE ROUND
 		if(curr>monopoly_numplayer-1){
 			round++;
 			curr=0;
@@ -578,12 +582,12 @@ void monopoly_gamemenu(struct monopoly_player* players, struct monopoly_block *b
 		system("cls");
 		monopoly_currmap(players, blocks, curr);
 		if(players[curr].freeze==true){ // for those in jail
-			printf(" Sorry, but you're in jail!\n");
-			printf(" You'll be able to move in the next round!\n");
+			printf("  Sorry, but you're in jail!\n");
+			printf("  You'll be able to move in the next round!\n");
 			players[curr].freeze= false;
 			curr++;
-			printf(" Press any key to continue...");
-			getchar();
+			printf("  Press any key to continue...");
+			getch();
 			continue;
 		}
 		if(players[curr].travel==true){
@@ -591,40 +595,39 @@ void monopoly_gamemenu(struct monopoly_player* players, struct monopoly_block *b
 			players[curr].travel = false;
 			if(players[curr].lose==true)break;
 			curr++;
-			printf(" Press any key to continue...");
-			getchar();
+			printf("  Press any key to continue...");
+			getch();
 			continue;
 		}		
-		printf(" [Press Q if you want to give up]\n");
-		printf(" Press any key to roll dice...\n");
-		printf(" Rolled dice: %d\n", round);
+		printf("  [Press Q if you want to give up]\n");
+		printf("  Press any key to roll dice...\n");
+		printf("  Rolled dice: %d\n", round);
 		char dice;
-		scanf("%c", &dice);
-		getchar();
+		dice = getch();
 		if(dice=='q' && round>2){
 			flag=0;
 			break;
 		}
 		else{
 			if(dice =='q'){
-				printf(" You can't give up on 1~2 round!\n");
-				printf(" Press any key to reroll...");
-				getchar();
+				printf("  You can't give up on 1~2 round!\n");
+				printf("  Press any key to reroll...");
+				getch();
 				continue;
 			}
 			else{
 				srand(time(0));
 				int move = (rand()%12)+1;
 				players[curr].location+=move;
-				// JIKA MELEWATI START, MAKA MENDAPAT UANG 200K
+				// IF PASS GO BLOCK, RECEIVE 200 K MONEY
 				if(players[curr].location>27){
 					players[curr].location-=27;
 					players[curr].money+=200;
-					printf(" You got 200 K money from the Bank\n");
-					printf(" Press any key to continue...");
-					getchar();
+					printf("  You got 200 K money from the Bank\n");
+					printf("  Press any key to continue...");
+					getch();
 				}
-				//MEMINDAHKAN PEMAIN
+				//MOVE AND DETERMINE PLAYER'S ACTIONS
 				monopoly_find(curr, players);
 				system("cls");
 				monopoly_currmap(players, blocks, curr);
@@ -633,12 +636,13 @@ void monopoly_gamemenu(struct monopoly_player* players, struct monopoly_block *b
 			}
 		}
 		check = monopoly_cekwin(players);
-		printf(" Press any key to continue...");
-		getchar();
+		printf("  Press any key to continue...");
+		getch();
 		curr++;
 	}while(check==1 && flag==1);
 	if(flag==0){
-		printf(" %s chose to give up!\n\n");	
+		printf("  %s chose to give up!\n\n");
+		getchar();	
 	}
 	int sort[monopoly_numplayer];
 	for(int i=0;i<monopoly_numplayer;i++){
@@ -661,18 +665,16 @@ void monopoly_gamemenu(struct monopoly_player* players, struct monopoly_block *b
 	printf(" Total Assets: %d K\n", players[win].assets);
 	printf(" Money: %d K\n", players[win].money);
 	printf(" Total (Money + Assets): %d K\n\n", players[win].money+players[win].assets);
-	FILE *fwinner = fopen("E:\\MINIGAME COMPILATION\\Monopoly\\winnerlist.txt", "a");
+	FILE *fwinner = fopen(".\\Monopoly\\winnerlist.txt", "a");
 	fprintf(fwinner, "%s %d\n", players[win].name, players[win].money+players[win].assets);
 	fclose(fwinner);
 	printf(" Press Enter to continue!");
 	getchar();
-	//37 6, 37 7, 38 6, 38 7
-	// up down = 5, left right = 14
 }
 
-//SETUP PERMAINAN
+//SETUP GAME
 void monopoly_setup(struct monopoly_player *players){
-	//INPUT NAMA-NAMA PEMAIN
+	//INPUT PLAYER'S NAME
 	for(int i=1;i<=monopoly_numplayer;i++){
 		int len, takenFlag;
 		char name[255];
@@ -694,7 +696,7 @@ void monopoly_setup(struct monopoly_player *players){
 		}while(takenFlag==0);
 		strcpy(players[i-1].name, name);
 	}
-	// MEMBAGI SIMBOL-SIMBOL YANG AKAN MENJADI ID PEMAIN, DAN MENEMPATKAN PEMAIN PADA POSISI MASING-MASING
+	// GIVE SYMBOLS AND INITIAL LOCATION
 	char icons = '#';
 	for(int j=0;j<monopoly_numplayer;j++){
 		players[j].icon = icons;
@@ -704,19 +706,19 @@ void monopoly_setup(struct monopoly_player *players){
 		if(j<2)players[j].row1 = 37;
 		else players[j].row1= 38;
 	}
-	// MENGGUNAKAN FILE PROCESSING UNTUK SCAN MAP
-	FILE *fmap = fopen("E:\\MINIGAME COMPILATION\\Monopoly\\monopolyMap.txt", "r");
+	// FILE PROCESSING TO SCAN MAP
+	FILE *fmap = fopen(".\\Monopoly\\monopolyMap.txt", "r");
 	monopoly_index =0;
 	while(fscanf(fmap, "%[^\n]\n",monopoly_map[monopoly_index])!=EOF){
 		monopoly_index++;
 	}
 	fclose(fmap);
 }
-// FUNGSI UNTUK MEMULAI PERMAINAN(SECARA KESELURUHAN)
+// START GAME
 void monopoly_playgame(){
-	//setup data untuk setiap block.
+	//setup block data.
 	struct monopoly_block blocks[28];
-	FILE *fblock = fopen("E:\\MINIGAME COMPILATION\\Monopoly\\block_information.txt", "r");
+	FILE *fblock = fopen(".\\Monopoly\\block_information.txt", "r");
 	int monopoly_index2=0;
 	while(fscanf(fblock, "%[^#]#%d#%s\n", blocks[monopoly_index2].name, &blocks[monopoly_index2].cost, blocks[monopoly_index2].info)!=EOF){
 		monopoly_index2++;
@@ -767,9 +769,8 @@ void monopoly_highscore(){
 		printf(" %d. %s %d K\n", i+1, rank[sorting[i]], arr[sorting[i]]);
 	}
 	printf("\n");
-	getchar();
 	printf(" Press any key to continue...");
-	getchar();
+	getch();
 }
 
 void monopoly_htp(){
