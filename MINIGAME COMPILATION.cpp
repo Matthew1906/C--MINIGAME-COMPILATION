@@ -10,10 +10,14 @@
 #include"Snakes\Snakesfunc.h"
 #include"Station Manager\StationManagerfunc.h"
 #include"Census System\CensusSystemfunc.h"
+#include"Dragon Book\DragonBook.h"
 
 void subMenu_coreTraining(){
 	char option;
 	do{
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+   	 	const SMALL_RECT WinSize = {0,0,155,30};
+    	SetConsoleWindowInfo( hConsole, true, &WinSize);
 		do{
 			system("cls");
 			printf("\t\t\t\t   _____ ____  _____  ______   _______ _____            _____ _   _ _____ _   _  _____            _   _          _____  \n");
@@ -26,7 +30,7 @@ void subMenu_coreTraining(){
 			printf("\t\t\t\t\t\t\t\t\t =======================================\n");
 			printf("\t\t\t\t\t\t\t\t\t| 1. STATION MANAGER                   |\n");
 			printf("\t\t\t\t\t\t\t\t\t| 2. CENSUS SYSTEM                     |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 3. MONSTERS AND WHERE TO FIND THEM   |\n");
+			printf("\t\t\t\t\t\t\t\t\t| 3. DRAGON BOOK                       |\n");
 			printf("\t\t\t\t\t\t\t\t\t| 4. THE MATCHMAKER                    |\n");
 			printf("\t\t\t\t\t\t\t\t\t| 5. OTHELLO                           |\n");
 			printf("\t\t\t\t\t\t\t\t\t| 6. COLLECTOR OF STARS                |\n");
@@ -47,7 +51,8 @@ void subMenu_coreTraining(){
 				// implements hashtable using pearson hash function, implementing separate chaining to handle collisions, and file processing
 				break;
 			case 3:
-				// original name = Handler Book
+				dragonBook_game();// original name = Handler Book
+				// implements AVL Tree, linked list, padding, accepting key inputs, console manipulation, and modified middle square hashing method
 				break;
 			case 4:
 				// original name = Couple Vinder
@@ -72,6 +77,9 @@ void subMenu_coreTraining(){
 void subMenu_selfTraining(){
 	char option;
 	do{
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+   	 	const SMALL_RECT WinSize = {0,0,145,30};
+    	SetConsoleWindowInfo( hConsole, true, &WinSize);
 		do{
 			system("cls");
 			printf("\t\t\t   _____ ______ _      ______   _______ _____            _____ _   _ _____ _   _  _____ \n");
@@ -124,6 +132,9 @@ void subMenu_selfTraining(){
 void subMenu_preTraining(){
 	char option;
 	do{
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+   	 	const SMALL_RECT WinSize = {0,0,155,30};
+    	SetConsoleWindowInfo( hConsole, true, &WinSize);
 		do{
 			system("cls");
 			printf("\t\t\t  _____   _____   ______   _______  _____             _____  _   _  _____  _   _   _____            _   _            _____   \n");
@@ -188,6 +199,9 @@ void subMenu_aboutThisGame(){
 int main(){
 	char option;
 	do{
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+   	 	const SMALL_RECT WinSize = {0,0,185,30};
+    	SetConsoleWindowInfo( hConsole, true, &WinSize);
 		do{
 			system("cls");
 			printf("\t\t\t  __  __ _____ _   _ _____ _____          __  __ ______    _____ ____  __  __ _____ _____ _            _______ _____ ____  _   _ \n");
