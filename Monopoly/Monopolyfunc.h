@@ -3,6 +3,8 @@
 #include<string.h>
 #include<time.h>
 #include<conio.h>
+#include<windows.h>
+
 int monopoly_index, monopoly_index2, monopoly_numplayer;
 char monopoly_map[105][205]={0};
 
@@ -563,6 +565,7 @@ void monopoly_todo(struct monopoly_player *players, int curr, struct monopoly_bl
 // GAME LOOP
 void monopoly_gamemenu(struct monopoly_player* players, struct monopoly_block *blocks){
 	system("cls");
+	
 	// SETUP
 	for(int i=0;i<monopoly_numplayer;i++){
 		monopoly_map[players[i].row1][players[i].col1] = players[i].icon;
@@ -791,7 +794,7 @@ void monopoly_htp(){
 	return;
 }
 
-void monopoly_game(){
+void monopoly_game(){ 
 	char choose1;
 	do{
 		do{

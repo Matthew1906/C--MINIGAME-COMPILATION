@@ -288,6 +288,9 @@ void tictactoe_htp(){
 }
 void tictactoe_game(){
 	char tictactoe_choice;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+   	const SMALL_RECT WinSize = {0,0,125,20};
+    SetConsoleWindowInfo( hConsole, true, &WinSize);
 	do{
 		do{
 			system("cls");
