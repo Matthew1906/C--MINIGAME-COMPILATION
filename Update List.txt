@@ -1,7 +1,6 @@
 
 TO BE FIXED: 
-- Monopoly:
-	a. update map (if possible, to erase traces of NAR Training-> prevent plagiarism, although technically it already is)
+- None
 
 TO BE MADE:
 - Handler Book

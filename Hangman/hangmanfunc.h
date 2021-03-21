@@ -3,6 +3,8 @@
 #include<stdlib.h>
 #include<time.h>
 #include<conio.h>
+#include<windows.h>
+
 // Function Declaration
 void hangman_strike1();
 void hangman_strike2();
@@ -272,6 +274,9 @@ void hangman_leaderboard(){
 }
 
 void hangman_game(){
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    const SMALL_RECT WinSize = {0,0,135,30};
+    SetConsoleWindowInfo( hConsole, true, &WinSize);
 	char hangman_menu ;
 	do{
 		do{
@@ -285,7 +290,7 @@ void hangman_game(){
 			printf("\t\t\t\t\t\t\t>> ");
 			hangman_menu=getch();
 			printf("%c\n", hangman_menu);
-		}while(hangman_menu-'0'<1 || hangman_menu-'0'>3);
+		}while(hangman_menu-'0'<1 || hangman_menu-'0'>4);
 		switch(hangman_menu-'0'){
 			case 1:
 				hangman_startgame();
@@ -297,7 +302,7 @@ void hangman_game(){
 				hangman_leaderboard();
 				break;
 		}
-	}while(hangman_menu-'0'!=3);
+	}while(hangman_menu-'0'!=4);
 	return;
 }
 	
