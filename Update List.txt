@@ -3,8 +3,9 @@ TO BE FIXED:
 - None
 
 TO BE MADE:
-- Handler Book
 - couple vinder
 - othello
 - dijkstra stars
 - chasing goat
+- pacman
+- minesweeper
