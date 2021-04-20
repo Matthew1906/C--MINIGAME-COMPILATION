@@ -79,20 +79,21 @@ bool bookShop_pop(char *id){
 
 void bookShop_addBook(){
 	system("cls");
-	char id[25]="apple";
+	printf("\n\n");
+	char id[25]="";
 	srand(time(0));
 	int ch1 = rand()%26;
 	int ch2 = rand()%26;
 	int ch3 = rand()%26;
 	int number = rand()%100;
 	sprintf(id,"%s%c%c%c%02d",id,ch1+'A', ch2+'A', ch3+'A', number);
-	printf("ID: %s\n", id);
+	printf(" ID: %s\n", id);
 	getchar();
 	int addFlag = 1;
 	char name[25];
 	do{
 		addFlag = 1;
-		printf("Input Book Name [5..20]: ");
+		printf(" Input Book Name [5..20]: ");
 		scanf("%[^\n]", name);
 		getchar();
 		int n = strlen(name);
@@ -103,7 +104,7 @@ void bookShop_addBook(){
 	char genre[25];
 	do{
 		addFlag = 1;
-		printf("Input Book Genre [Fantasy | Romance | Horror][case sensitive]: ");
+		printf(" Input Book Genre [Fantasy | Romance | Horror][case sensitive]: ");
 		scanf("%s", genre);
 		getchar();
 		if(strcmp(genre,"Fantasy")!=0 && strcmp(genre,"Romance")!=0 && strcmp(genre,"Horror")!=0){
@@ -113,7 +114,7 @@ void bookShop_addBook(){
 	char author[255];
 	do{
 		addFlag = 1;
-		printf("Input Book Author [minimum 1 character]: ");
+		printf(" Input Book Author [minimum 1 character]: ");
 		scanf("%[^\n]", author);
 		getchar();
 		int n = strlen(author);
@@ -124,7 +125,7 @@ void bookShop_addBook(){
 	char publisher[255];
 	do{
 		addFlag = 1;
-		printf("Input Book Publisher [3..10]: ");
+		printf(" Input Book Publisher [3..10]: ");
 		scanf("%[^\n]", publisher);
 		getchar();
 		int n = strlen(publisher);
@@ -135,7 +136,7 @@ void bookShop_addBook(){
 	int price;
 	do{
 		addFlag = 1;
-		printf("Input Book Price[cannot zero]: ");
+		printf(" Input Book Price[cannot zero]: ");
 		scanf("%d", &price);
 		getchar();
 		if(price<1){
@@ -143,30 +144,31 @@ void bookShop_addBook(){
 		}
 	}while(addFlag == 0);
 	bookShop_push(id,name,genre,author,publisher,price);
-	printf("New Book successfully inserted!");
+	printf(" New Book successfully inserted!");
 	getchar();
 	return;
 }
 
 void bookShop_viewBook(){
 	system("cls");
+	printf("\n\n");
 	int no = 1;
 	for(int i=0;i<bookShop_SIZE;++i){
 		struct bookShop_Book *curr = bookShop_hashTable[i];
 		while(curr){
-			printf("Book %d\n", no);
-			printf("ID : %s\n", curr->id);
-			printf("Name : %s\n", curr->name);
-			printf("Genre : %s\n", curr->genre);
-			printf("Author : %s\n", curr->author);
-			printf("Price : %d\n", curr->price);
-			printf("===================\n\n");
+			printf(" Book %d\n", no);
+			printf(" ID : %s\n", curr->id);
+			printf(" Name : %s\n", curr->name);
+			printf(" Genre : %s\n", curr->genre);
+			printf(" Author : %s\n", curr->author);
+			printf(" Price : %d\n", curr->price);
+			printf(" ===================\n\n");
 			no++;
 			curr = curr->next;
 		}
 	}
 	if(no==1){
-		printf("List is empty..");
+		printf(" List is empty..");
 	}
 	getchar();
 	getchar();
@@ -175,37 +177,38 @@ void bookShop_viewBook(){
 
 void bookShop_deleteBook(){
 	system("cls");
+	printf("\n\n");
 	int no = 1;
 	for(int i=0;i<bookShop_SIZE;++i){
 		struct bookShop_Book *curr = bookShop_hashTable[i];
 		while(curr){
-			printf("Book %d\n", no);
-			printf("ID : %s\n", curr->id);
-			printf("Name : %s\n", curr->name);
-			printf("Genre : %s\n", curr->genre);
-			printf("Author : %s\n", curr->author);
-			printf("Price : %d\n", curr->price);
-			printf("===================\n\n");
+			printf(" Book %d\n", no);
+			printf(" ID : %s\n", curr->id);
+			printf(" Name : %s\n", curr->name);
+			printf(" Genre : %s\n", curr->genre);
+			printf(" Author : %s\n", curr->author);
+			printf(" Price : %d\n", curr->price);
+			printf(" ===================\n\n");
 			no++;
 			curr = curr->next;
 		}
 	}
 	if(no==1){
-		printf("List is empty..");
+		printf(" List is empty..");
 		getchar();
 		getchar();
 		return;
 	}
 	char toDelete[10];
-	printf("Enter Book ID to be deleted\nID: ");
+	printf(" Enter Book ID to be deleted\nID: ");
 	scanf("%s", toDelete);
 	getchar();
 	bool deleted = bookShop_pop(toDelete);
 	if(deleted){
-		printf("Book successfully deleted!");
+		printf(" Book successfully deleted!");
 	}
 	else{
-		printf("Book not found!");
+		printf(" Book not found!");
 	}
 	getchar();
 	return;
@@ -216,13 +219,13 @@ void bookShop_game(){
 	char menu;
 	do{
 		system("cls");
-		printf("Book Shop\n");
-		printf("==========\n");
-		printf("1. Add New Book\n");
-		printf("2. View Books\n");
-		printf("3. Delete Book\n");
-		printf("4. Exit\n");
-		printf(">> ");
+		printf("\n\n Book Shop\n");
+		printf(" ==========\n");
+		printf(" 1. Add New Book\n");
+		printf(" 2. View Books\n");
+		printf(" 3. Delete Book\n");
+		printf(" 4. Exit\n");
+		printf(" >> ");
 		menu = getchar();
 		switch(menu-'0'){
 			case 1:

@@ -52,7 +52,7 @@ int main(){
 			printf("\t\t\t\t\t\t\t\t\t>> ");
 			option = getch();
 			printf("%c\n", option);
-		}while(option-'0'<0 || option-'0'>4);
+		}while(option-'0'<0 || option-'0'>5);
 		system("cls");
 		switch(option-'0'){
 			case 1:
@@ -194,28 +194,28 @@ void subMenu_coreTraining(){
 	char option;
 	do{
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-   	 	const SMALL_RECT WinSize = {0,0,155,30};
+   	 	const SMALL_RECT WinSize = {0,0,145,30};
     	SetConsoleWindowInfo( hConsole, true, &WinSize);
 		do{
 			system("cls");
-			printf("\t\t\t\t   _____ ____  _____  ______   _______ _____            _____ _   _ _____ _   _  _____            _   _          _____  \n");
-			printf("\t\t\t\t  / ____/ __ \\|  __ \\|  ____| |__   __|  __ \\     /\\   |_   _| \\ | |_   _| \\ | |/ ____|          | \\ | |   /\\   |  __ \\ \n");
-			printf("\t\t\t\t | |   | |  | | |__) | |__       | |  | |__) |   /  \\    | | |  \\| | | | |  \\| | |  __   ______  |  \\| |  /  \\  | |__) |\n");
-			printf("\t\t\t\t | |   | |  | |  _  /|  __|      | |  |  _  /   / /\\ \\   | | | . ` | | | | . ` | | |_ | |______| | . ` | / /\\ \\ |  _  / \n");
-			printf("\t\t\t\t | |___| |__| | | \\ \\| |____     | |  | | \\ \\  / ____ \\ _| |_| |\\  |_| |_| |\\  | |__| |          | |\\  |/ ____ \\| | \\ \\ \n");
-			printf("\t\t\t\t  \\_____\\____/|_|  \\_\\______|    |_|  |_|  \\_\\/_/    \\_\\_____|_| \\_|_____|_| \\_|\\_____|          |_| \\_/_/    \\_\\_|  \\_\\\n\n");                                                                                                            
-			printf("\n\t\t\t\t\t\t\t\t Due to copyright issues, the name of the games will be changed\n\n");
-			printf("\t\t\t\t\t\t\t\t\t =======================================\n");
-			printf("\t\t\t\t\t\t\t\t\t| 1. STATION MANAGER                   |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 2. CENSUS SYSTEM                     |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 3. DRAGON BOOK                       |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 4. THE MATCHMAKER                    |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 5. OTHELLO                           |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 6. COLLECTOR OF STARS                |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 7. GOAT HUNTER                       |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 0. BACK TO MENU                      |\n");
-			printf("\t\t\t\t\t\t\t\t\t =======================================\n");
-			printf("\t\t\t\t\t\t\t\t\t>> ");
+			printf("\t\t   _____ ____  _____  ______   _______ _____            _____ _   _ _____ _   _  _____            _   _          _____  \n");
+			printf("\t\t  / ____/ __ \\|  __ \\|  ____| |__   __|  __ \\     /\\   |_   _| \\ | |_   _| \\ | |/ ____|          | \\ | |   /\\   |  __ \\ \n");
+			printf("\t\t | |   | |  | | |__) | |__       | |  | |__) |   /  \\    | | |  \\| | | | |  \\| | |  __   ______  |  \\| |  /  \\  | |__) |\n");
+			printf("\t\t | |   | |  | |  _  /|  __|      | |  |  _  /   / /\\ \\   | | | . ` | | | | . ` | | |_ | |______| | . ` | / /\\ \\ |  _  / \n");
+			printf("\t\t | |___| |__| | | \\ \\| |____     | |  | | \\ \\  / ____ \\ _| |_| |\\  |_| |_| |\\  | |__| |          | |\\  |/ ____ \\| | \\ \\ \n");
+			printf("\t\t  \\_____\\____/|_|  \\_\\______|    |_|  |_|  \\_\\/_/    \\_\\_____|_| \\_|_____|_| \\_|\\_____|          |_| \\_/_/    \\_\\_|  \\_\\\n\n");                                                                                                            
+			printf("\n\t\t\t\t\t\t Due to copyright issues, the name of the games will be changed\n\n");
+			printf("\t\t\t\t\t\t\t =======================================\n");
+			printf("\t\t\t\t\t\t\t| 1. STATION MANAGER                   |\n");
+			printf("\t\t\t\t\t\t\t| 2. CENSUS SYSTEM                     |\n");
+			printf("\t\t\t\t\t\t\t| 3. DRAGON BOOK                       |\n");
+			printf("\t\t\t\t\t\t\t| 4. THE MATCHMAKER                    |\n");
+			printf("\t\t\t\t\t\t\t| 5. OTHELLO                           |\n");
+			printf("\t\t\t\t\t\t\t| 6. COLLECTOR OF STARS                |\n");
+			printf("\t\t\t\t\t\t\t| 7. GOAT HUNTER                       |\n");
+			printf("\t\t\t\t\t\t\t| 0. BACK TO MENU                      |\n");
+			printf("\t\t\t\t\t\t\t =======================================\n");
+			printf("\t\t\t\t\t\t\t>> ");
 			option = getch();
 			printf("%c\n", option);
 		}while(option-'0'<0 || option-'0'>7);
@@ -260,12 +260,12 @@ void subMenu_universityTraining(){
     	SetConsoleWindowInfo( hConsole, true, &WinSize);
 		do{
 			system("cls");
-			printf("\t\t\t  _____   _____   ______   _______  _____             _____  _   _  _____  _   _   _____            _   _            _____   \n");
-			printf("\t\t\t |  __ \\ |  __ \\ |  ____| |__   __||  __ \\     /\\    |_   _|| \\ | ||_   _|| \\ | | / ____|          | \\ | |    /\\    |  __ \\  \n");
-			printf("\t\t\t | |__) || |__) || |__       | |   | |__) |   /  \\     | |  |  \\| |  | |  |  \\| || |  __   ______  |  \\| |   /  \\   | |__) | \n");
-			printf("\t\t\t |  ___/ |  _  / |  __|      | |   |  _  /   / /\\ \\    | |  | . ` |  | |  | . ` || | |_ | |______| | . ` |  / /\\ \\  |  _  /  \n");
-			printf("\t\t\t | |     | | \\ \\ | |____     | |   | | \\ \\  / ____ \\  _| |_ | |\\  | _| |_ | |\\  || |__| |          | |\\  | / ____ \\ | | \\ \\  \n");
-			printf("\t\t\t |_|     |_|  \\_\\|______|    |_|   |_|  \\_\\/_/    \\_\\|_____||_| \\_||_____||_| \\_| \\_____|          |_| \\_|/_/    \\_\\|_|  \\_\\ \n\n");
+			printf("\t\t _    _ _   _ _______      ________ _____   _____ _____ _________     __  _______ _____            _____ _   _ _____ _   _  _____ \n");
+ 			printf("\t\t| |  | | \\ | |_   _\\ \\    / /  ____|  __ \\ / ____|_   _|__   __\\ \\   / / |__   __|  __ \\     /\\   |_   _| \\ | |_   _| \\ | |/ ____|\n");
+            printf("\t\t| |  | |  \\| | | |  \\ \\  / /| |__  | |__) | (___   | |    | |   \\ \\_/ /     | |  | |__) |   /  \\    | | |  \\| | | | |  \\| | |  __ \n");
+            printf("\t\t| |  | | . ` | | |   \\ \\/ / |  __| |  _  / \\___ \\  | |    | |    \\   /      | |  |  _  /   / /\\ \\   | | | . ` | | | | . ` | | |_ |\n");
+            printf("\t\t| |__| | |\\  |_| |_   \\  /  | |____| | \\ \\ ____) |_| |_   | |     | |       | |  | | \\ \\  / ____ \\ _| |_| |\\  |_| |_| |\\  | |__| |\n");
+            printf("\t\t \\____/|_| \\_|_____|   \\/   |______|_|  \\_\\_____/|_____|  |_|     |_|       |_|  |_|  \\_\\/_/    \\_\\_____|_| \\_|_____|_| \\_|\\_____|\n\n");
 			printf("\t\t\t\t\t\t\t\t ==========================\n");
 			printf("\t\t\t\t\t\t\t\t| 1. MINING SIMULATOR      |\n");
 			printf("\t\t\t\t\t\t\t\t| 2. PETSHOP               |\n");

@@ -19,7 +19,7 @@ bool rektify_findSong(char *name){
 	struct rektify_data *temp = rektify_top;
 	while(temp){
 		if(strcmp(temp->title, name)==0){
-			printf("Song %s is already in the playlist!\n", name);
+			printf(" Song %s is already in the playlist!\n", name);
 			getchar();
 			return true;
 		}
@@ -59,13 +59,13 @@ void rektify_push(char *name, int priority){
 
 void rektify_pop(){
 	if(!rektify_top){
-		printf("No Song to be played...\n");
+		printf(" No Song to be played...\n");
 		getchar();
 		return;
 	}
 	else{
 		struct rektify_data *temp = rektify_top;
-		printf("Song %s is being played now...\n", temp->title);
+		printf(" Song %s is being played now...\n", temp->title);
 		getchar();
 		rektify_top = temp->next;
 		free(temp);
@@ -76,13 +76,13 @@ void rektify_pop(){
 void rektify_printAll(){
 	printf("\n");
 	if(!rektify_top){
-		printf("No song in the playlist!\n");
+		printf(" No song in the playlist!\n");
 	}
 	else{		
-		printf("Name                 | Prio |\n");
+		printf(" Name                 | Prio |\n");
 		struct rektify_data *temp = rektify_top;
 		while(temp){
-			printf("%-20s | %-3d  |", temp->title, temp->priority);
+			printf(" %-20s | %-3d  |", temp->title, temp->priority);
 			if(temp==rektify_top){
 				printf("    --> Top List Song\n");
 			}
@@ -104,13 +104,13 @@ void rektify_game(){
 		do{
 			system("cls");
 			choiceFlag = true;
-			printf("-- Rektify Playlist --\n");
-			printf("**********************\n");
+			printf("\n\n -- Rektify Playlist --\n");
+			printf(" **********************\n");
 			rektify_printAll();
-			printf("1. Insert new song into your playlist\n");
-			printf("2. Play song on the top list\n");
-			printf("3. Exit\n");
-			printf("Insert menu: ");
+			printf(" 1. Insert new song into your playlist\n");
+			printf(" 2. Play song on the top list\n");
+			printf(" 3. Exit\n");
+			printf(" Insert menu: ");
 			scanf("%s", choice);
 			getchar();
 			if(strcmp(choice,"1")!=0 && strcmp(choice,"2")!=0 && strcmp(choice,"3")!=0){
@@ -119,11 +119,11 @@ void rektify_game(){
 		}while(!choiceFlag);
 		if(strcmp(choice,"1")==0){
 			char name[255];
-			printf("Insert song name: ");
+			printf(" Insert song name: ");
 			scanf("%s", &name);
 			getchar();
 			int priority;
-			printf("Insert priority[1|2|3]: ");
+			printf(" Insert priority[1|2|3]: ");
 			scanf("%d", &priority);
 			getchar();
 			if(priority<1||priority>4){

@@ -78,13 +78,13 @@ bool monsterEncyclopedia_displayAll(){
 	for(int i =0;i<monsterEncyclopedia_SIZE;++i){
 		struct monsterEncyclopedia_Monster *temp = monsterEncyclopedia_hashTable[i];
 		while(temp){
-			printf("=================================\n");
-			printf("ID      : %s\n", temp->id);
-			printf("Name    : %s\n", temp->name);
-			printf("Type    : %s\n", temp->type);
-			printf("Size    : %.1lf\n", temp->size);
-			printf("Location: %s\n", temp->location);
-			printf("=================================\n\n");
+			printf(" =================================\n");
+			printf(" ID      : %s\n", temp->id);
+			printf(" Name    : %s\n", temp->name);
+			printf(" Type    : %s\n", temp->type);
+			printf(" Size    : %.1lf\n", temp->size);
+			printf(" Location: %s\n", temp->location);
+			printf(" =================================\n\n");
 			temp = temp->next;
 			empty = false;
 		}
@@ -117,12 +117,13 @@ struct monsterEncyclopedia_Monster *monsterEncyclopedia_searchMonster(char *id){
 
 void monsterEncyclopedia_insertMonster(){
 	system("cls");
+	printf("\n\n");
 	getchar();
 	int addFlag = 1;
 	char name[255];
 	do{
 		addFlag = 1;
-		printf("Input monster name[3 - 20 characters | Starts with Capital Letter]: ");
+		printf(" Input monster name[3 - 20 characters | Starts with Capital Letter]: ");
 		scanf("%[^\n]", name);
 		getchar();
 		int len = strlen(name);
@@ -136,7 +137,7 @@ void monsterEncyclopedia_insertMonster(){
 	char type[255];
 	do{
 		addFlag = 1;
-		printf("Input monster type[Large | Small | Endemic | Pets](case sensitive): ");
+		printf(" Input monster type[Large | Small | Endemic | Pets](case sensitive): ");
 		scanf("%[^\n]", type);
 		getchar();
 		if(strcmp(type,"Large")!=0 && strcmp(type,"Small")!=0 && strcmp(type,"Endemic")!=0 && strcmp(type,"Pets")!=0){
@@ -146,7 +147,7 @@ void monsterEncyclopedia_insertMonster(){
 	double size;
 	do{
 		addFlag = 1;
-		printf("Input monster size[100.0 - 5000.0](inclusive): ");
+		printf(" Input monster size[100.0 - 5000.0](inclusive): ");
 		scanf("%lf", &size);
 		getchar();
 		if(size<100.0 || size>5000.0){
@@ -156,7 +157,7 @@ void monsterEncyclopedia_insertMonster(){
 	char loc[255];
 	do{
 		addFlag = 0;
-		printf("Input monster location[ends with Biome](case sensitive): ");
+		printf(" Input monster location[ends with Biome](case sensitive): ");
 		scanf("%[^\n]", loc);
 		getchar();
 		int len = strlen(loc);
@@ -179,34 +180,35 @@ void monsterEncyclopedia_insertMonster(){
 		id[i] = temp[i-3];
 	}
 	id[6] = '\0';
-	printf("Monster ID : %s\n", id);
+	printf(" Monster ID : %s\n", id);
 	monsterEncyclopedia_push(id,name,type,loc,size);
-	printf("New Monster successfully added!\n");
-	printf("Press enter to continue..");
+	printf(" New Monster successfully added!\n");
+	printf(" Press enter to continue..");
 	getchar();
 	return;
 }
 
 void monsterEncyclopedia_changeMonster(){
 	system("cls");
+	printf("\n\n");
 	monsterEncyclopedia_displayAll();
 	char id[255];
-	printf("Input monster id: ");
+	printf(" Input monster id: ");
 	scanf("%s", id);
 	getchar();
 	struct monsterEncyclopedia_Monster *find = monsterEncyclopedia_searchMonster(id);
 	if(!find){
-		printf("Monster not found...");
+		printf(" Monster not found...");
 	}
 	else{
-		printf("[Input 0 to skip update]\n");
+		printf(" [Input 0 to skip update]\n");
 		int addFlag = 1;
 		bool modify = true;
 		char name[255];
 		do{
 			modify = true;
 			addFlag = 1;
-			printf("Input monster name[3 - 20 characters | Starts with Capital Letter]: ");
+			printf(" Input monster name[3 - 20 characters | Starts with Capital Letter]: ");
 			scanf("%[^\n]", name);
 			getchar();
 			int len = strlen(name);
@@ -228,7 +230,7 @@ void monsterEncyclopedia_changeMonster(){
 		do{
 			modify = true;
 			addFlag = 1;
-			printf("Input monster type[Large | Small | Endemic | Pets](case sensitive): ");
+			printf(" Input monster type[Large | Small | Endemic | Pets](case sensitive): ");
 			scanf("%[^\n]", type);
 			getchar();
 			if(strcmp(type,"0")==0){
@@ -246,7 +248,7 @@ void monsterEncyclopedia_changeMonster(){
 		do{
 			modify = true;
 			addFlag = 1;
-			printf("Input monster size[100.0 - 5000.0](inclusive): ");
+			printf(" Input monster size[100.0 - 5000.0](inclusive): ");
 			scanf("%lf", &size);
 			getchar();
 			if(size==0){
@@ -264,7 +266,7 @@ void monsterEncyclopedia_changeMonster(){
 		do{
 			modify = true;
 			addFlag = 0;
-			printf("Input monster location[ends with Biome](case sensitive): ");
+			printf(" Input monster location[ends with Biome](case sensitive): ");
 			scanf("%[^\n]", loc);
 			getchar();
 			if(strcmp(loc,"0")==0){
@@ -279,8 +281,8 @@ void monsterEncyclopedia_changeMonster(){
 		if(modify){
 			strcpy(find->location, loc);
 		}
-		printf("Monster successfully modified!\n");
-		printf("Press enter to continue..");
+		printf(" Monster successfully modified!\n");
+		printf(" Press enter to continue..");
 	}
 	getchar();
 	return;
@@ -288,28 +290,29 @@ void monsterEncyclopedia_changeMonster(){
 
 void monsterEncyclopedia_removeMonster(){
 	system("cls");
+	printf("\n\n");
 	monsterEncyclopedia_displayAll();
 	char id[255];
-	printf("Input monster id: ");
+	printf(" Input monster id: ");
 	scanf("%s", id);
 	getchar();
 	struct monsterEncyclopedia_Monster *find = monsterEncyclopedia_searchMonster(id);
 	if(find){
 		system("cls");
-		printf("=================================\n");
-		printf("ID      : %s\n", find->id);
-		printf("Name    : %s\n", find->name);
-		printf("Type    : %s\n", find->type);
-		printf("Size    : %.1lf\n", find->size);
-		printf("Location: %s\n", find->location);
-		printf("=================================\n\n");
+		printf(" =================================\n");
+		printf(" ID      : %s\n", find->id);
+		printf(" Name    : %s\n", find->name);
+		printf(" Type    : %s\n", find->type);
+		printf(" Size    : %.1lf\n", find->size);
+		printf(" Location: %s\n", find->location);
+		printf(" =================================\n\n");
 	}
 	bool deleted = monsterEncyclopedia_pop(id);
 	if(deleted){
-		printf("Monster successfully deleted!\n");
+		printf(" Monster successfully deleted!\n");
 	}
-	else printf("Monster not found!\n");
-	printf("Press enter to continue..");
+	else printf(" Monster not found!\n");
+	printf(" Press enter to continue..");
 	getchar();
 }
 
@@ -317,16 +320,17 @@ void monsterEncyclopedia_game(){
 	char menu;
 	do{
 		system("cls");
+		printf("\n\n");
 		monsterEncyclopedia_displayAll();
 		printf("\n");
-		printf("==========================\n");
-		printf("<< Monster Encyclopedia >>\n");
-		printf("==========================\n");
-		printf("1. Insert New Monster\n");
-		printf("2. Change Monster Data\n");
-		printf("3. Remove Monster\n");
-		printf("4. Close Book\n");
-		printf(">> ");
+		printf(" ==========================\n");
+		printf(" << Monster Encyclopedia >>\n");
+		printf(" ==========================\n");
+		printf(" 1. Insert New Monster\n");
+		printf(" 2. Change Monster Data\n");
+		printf(" 3. Remove Monster\n");
+		printf(" 4. Close Book\n");
+		printf(" >> ");
 		menu = getchar();
 		switch(menu-'0'){
 			case 1:
