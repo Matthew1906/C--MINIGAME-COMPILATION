@@ -190,6 +190,7 @@ void subMenu_preTraining(){
 	}while(option-'0'!=0);
 }
 
+
 void subMenu_coreTraining(){
 	char option;
 	do{
@@ -209,10 +210,6 @@ void subMenu_coreTraining(){
 			printf("\t\t\t\t\t\t\t| 1. STATION MANAGER                   |\n");
 			printf("\t\t\t\t\t\t\t| 2. CENSUS SYSTEM                     |\n");
 			printf("\t\t\t\t\t\t\t| 3. DRAGON BOOK                       |\n");
-			printf("\t\t\t\t\t\t\t| 4. THE MATCHMAKER                    |\n");
-			printf("\t\t\t\t\t\t\t| 5. OTHELLO                           |\n");
-			printf("\t\t\t\t\t\t\t| 6. COLLECTOR OF STARS                |\n");
-			printf("\t\t\t\t\t\t\t| 7. GOAT HUNTER                       |\n");
 			printf("\t\t\t\t\t\t\t| 0. BACK TO MENU                      |\n");
 			printf("\t\t\t\t\t\t\t =======================================\n");
 			printf("\t\t\t\t\t\t\t>> ");
@@ -231,18 +228,6 @@ void subMenu_coreTraining(){
 			case 3:
 				dragonBook_game();// original name = Handler Book
 				// implements AVL Tree, linked list, padding, accepting key inputs, console manipulation, and modified middle square hashing method
-				break;
-			case 4:
-				// original name = Couple Vinder
-				break;
-			case 5:
-				// original name = Feel Good Othello
-				break;
-			case 6:
-				// original name = SUDUT and Precious Stars
-				break;
-			case 7:
-				// original name = Chasing Goat
 				break;
 			default:
 				return;
