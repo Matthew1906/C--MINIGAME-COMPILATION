@@ -9,3 +9,5 @@ Please take note that all of these games are derived from real games that have b
 ** NAR 21-1 = New Assistant Recruitment 21 - 1 , by Software Laboratory Center, Bina Nusantara University
 
 Most programs can only run using Windows Operating System
+
+(sorry if the style of code doesn't follow C Coding Standard, i've just figured it out after about 15 minigames and it will take too long to fix. Not to mention this is literally just for fun)
