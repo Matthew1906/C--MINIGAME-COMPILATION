@@ -10,4 +10,4 @@ Please take note that all of these games are derived from real games that have b
 
 Most programs can only run using Windows Operating System
 
-(sorry if the style of code doesn't follow C Coding Standard, i've just figured it out after about 15 minigames and it will take too long to fix. Not to mention this is literally just for fun)
+(I'm sorry if the style of code doesn't follow C Coding Standard, i've just figured it out after about 15 minigames and it will take too long to fix. Not to mention this is literally just for fun)
