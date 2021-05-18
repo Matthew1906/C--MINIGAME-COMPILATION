@@ -3,6 +3,7 @@
 #include"SELF TRAINING\TicTacToe\tictactoefunc.h"
 #include"SELF TRAINING\Opercooked\Opercookedfunc.h"
 #include"SELF TRAINING\Snakes\Snakesfunc.h"
+#include"SELF TRAINING\Minesweeper\Minesweeperfunc.h"
 
 #include"PRE TRAINING\Rambo\rambofunc.h"
 #include"PRE TRAINING\Fossil Hunter\FossilHunterfunc.h"
@@ -98,6 +99,7 @@ void subMenu_selfTraining(){
 			printf("\t\t\t\t\t\t\t| 3. TIC TAC TOE           |\n");
 			printf("\t\t\t\t\t\t\t| 4. OPERCOOKED            |\n");
 			printf("\t\t\t\t\t\t\t| 5. SNAKES                |\n");
+			printf("\t\t\t\t\t\t\t| 6. MINESWEEPER           |\n");
 			printf("\t\t\t\t\t\t\t| 0. BACK TO MENU          |\n");
 			printf("\t\t\t\t\t\t\t ==========================\n");
 			printf("\t\t\t\t\t\t\t>> ");
@@ -124,6 +126,10 @@ void subMenu_selfTraining(){
 			case 5:
 				snakes_game();
 				// implements file processing, linked lists, padding, game loop, accepting key inputs, and altering consoles.
+				break;
+			case 6:
+				minesweeper_game();
+				// implements gameloop, selection repetition, console manipulation, recursion
 				break;
 			default:
 				return;
