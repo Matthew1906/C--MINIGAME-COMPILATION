@@ -4,6 +4,7 @@
 #include"SELF TRAINING\Opercooked\Opercookedfunc.h"
 #include"SELF TRAINING\Snakes\Snakesfunc.h"
 #include"SELF TRAINING\Minesweeper\Minesweeperfunc.h"
+#include"SELF TRAINING\Warung Budi\Warungbudifunc.h"
 
 #include"PRE TRAINING\Rambo\rambofunc.h"
 #include"PRE TRAINING\Fossil Hunter\FossilHunterfunc.h"
@@ -100,12 +101,13 @@ void subMenu_selfTraining(){
 			printf("\t\t\t\t\t\t\t| 4. OPERCOOKED            |\n");
 			printf("\t\t\t\t\t\t\t| 5. SNAKES                |\n");
 			printf("\t\t\t\t\t\t\t| 6. MINESWEEPER           |\n");
+			printf("\t\t\t\t\t\t\t| 7. WARUNG BUDI           |\n");
 			printf("\t\t\t\t\t\t\t| 0. BACK TO MENU          |\n");
 			printf("\t\t\t\t\t\t\t ==========================\n");
 			printf("\t\t\t\t\t\t\t>> ");
 			option = getch();
 			printf("%c\n", option);
-		}while(option-'0'<0 || option-'0'>6);
+		}while(option-'0'<0 || option-'0'>7);
 		switch(option-'0'){
 			case 1:
 				ww_game(); 
@@ -130,6 +132,10 @@ void subMenu_selfTraining(){
 			case 6:
 				minesweeper_game();
 				// implements gameloop, selection repetition, console manipulation, recursion
+				break;
+			case 7:
+				warungbudi_game(); // Algorithm Bootcamp Season 2
+				// implements linked list and hashtables
 				break;
 			default:
 				return;
