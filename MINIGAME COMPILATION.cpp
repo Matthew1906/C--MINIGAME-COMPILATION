@@ -12,9 +12,9 @@
 #include"PRE TRAINING\Dungeon Escape\DungeonEscapefunc.h"
 #include"PRE TRAINING\Monster Maze\MonsterMazefunc.h"
 
-#include"CORE TRAINING\Station Manager\StationManagerfunc.h"
-#include"CORE TRAINING\Census System\CensusSystemfunc.h"
-#include"CORE TRAINING\Dragon Book\DragonBook.h"
+//#include"CORE TRAINING\Station Manager\StationManagerfunc.h"
+//#include"CORE TRAINING\Census System\CensusSystemfunc.h"
+//#include"CORE TRAINING\Dragon Book\DragonBook.h"
 
 #include"UNIVERSITY TRAINING\Mining Simulator\miningSimulator.h"
 #include"UNIVERSITY TRAINING\Pet Shop\petShop.h"
@@ -46,15 +46,15 @@ int main(){
 			printf("\t\t\t\t\t\t\t\t\t| PICK SUBMENU:             |\n");
 			printf("\t\t\t\t\t\t\t\t\t| 1. SELF TRAINING          |\n");
 			printf("\t\t\t\t\t\t\t\t\t| 2. PRE TRAINING NAR 21-1  |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 3. CORE TRAINING NAR 21-1 |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 4. UNIVERSITY LEARNING    |\n");
-			printf("\t\t\t\t\t\t\t\t\t| 5. ABOUT                  |\n");
+//			printf("\t\t\t\t\t\t\t\t\t| 3. CORE TRAINING NAR 21-1 |\n");
+			printf("\t\t\t\t\t\t\t\t\t| 3. UNIVERSITY LEARNING    |\n");
+			printf("\t\t\t\t\t\t\t\t\t| 4. ABOUT                  |\n");
 			printf("\t\t\t\t\t\t\t\t\t| 0. EXIT GAME              |\n");
 			printf("\t\t\t\t\t\t\t\t\t ============================\n");
 			printf("\t\t\t\t\t\t\t\t\t>> ");
 			option = getch();
 			printf("%c\n", option);
-		}while(option-'0'<0 || option-'0'>5);
+		}while(option-'0'<0 || option-'0'>4);
 		system("cls");
 		switch(option-'0'){
 			case 1:
@@ -63,13 +63,13 @@ int main(){
 			case 2:
 				subMenu_preTraining();
 				break;
-			case 3:
-				subMenu_coreTraining();
-				break;
-			case 4: 
+//			case 3:
+//				subMenu_coreTraining();
+//				break;
+			case 3: 
 				subMenu_universityTraining();
 				break;
-			case 5:
+			case 4:
 				subMenu_aboutThisGame();
 				break;
 			default:
@@ -202,52 +202,52 @@ void subMenu_preTraining(){
 	}while(option-'0'!=0);
 }
 
-
-void subMenu_coreTraining(){
-	char option;
-	do{
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-   	 	const SMALL_RECT WinSize = {0,0,145,30};
-    	SetConsoleWindowInfo( hConsole, true, &WinSize);
-		do{
-			system("cls");
-			printf("\t\t   _____ ____  _____  ______   _______ _____            _____ _   _ _____ _   _  _____            _   _          _____  \n");
-			printf("\t\t  / ____/ __ \\|  __ \\|  ____| |__   __|  __ \\     /\\   |_   _| \\ | |_   _| \\ | |/ ____|          | \\ | |   /\\   |  __ \\ \n");
-			printf("\t\t | |   | |  | | |__) | |__       | |  | |__) |   /  \\    | | |  \\| | | | |  \\| | |  __   ______  |  \\| |  /  \\  | |__) |\n");
-			printf("\t\t | |   | |  | |  _  /|  __|      | |  |  _  /   / /\\ \\   | | | . ` | | | | . ` | | |_ | |______| | . ` | / /\\ \\ |  _  / \n");
-			printf("\t\t | |___| |__| | | \\ \\| |____     | |  | | \\ \\  / ____ \\ _| |_| |\\  |_| |_| |\\  | |__| |          | |\\  |/ ____ \\| | \\ \\ \n");
-			printf("\t\t  \\_____\\____/|_|  \\_\\______|    |_|  |_|  \\_\\/_/    \\_\\_____|_| \\_|_____|_| \\_|\\_____|          |_| \\_/_/    \\_\\_|  \\_\\\n\n");                                                                                                            
-			printf("\n\t\t\t\t\t\t Due to copyright issues, the name of the games will be changed\n\n");
-			printf("\t\t\t\t\t\t\t =======================================\n");
-			printf("\t\t\t\t\t\t\t| 1. STATION MANAGER                   |\n");
-			printf("\t\t\t\t\t\t\t| 2. CENSUS SYSTEM                     |\n");
-			printf("\t\t\t\t\t\t\t| 3. DRAGON BOOK                       |\n");
-			printf("\t\t\t\t\t\t\t| 0. BACK TO MENU                      |\n");
-			printf("\t\t\t\t\t\t\t =======================================\n");
-			printf("\t\t\t\t\t\t\t>> ");
-			option = getch();
-			printf("%c\n", option);
-		}while(option-'0'<0 || option-'0'>7);
-		switch(option-'0'){
-			case 1:
-				stationManager_game();//original name = kereta aPHi
-				// implements Multiple Linked Lists and Breadth First Transversal
-				break;
-			case 2:
-				censusSystem_game();// original name = The Census Team
-				// implements hashtable using pearson hash function, implementing separate chaining to handle collisions, and file processing
-				break;
-			case 3:
-				dragonBook_game();// original name = Handler Book
-				// implements AVL Tree, linked list, padding, accepting key inputs, console manipulation, and modified middle square hashing method
-				break;
-			default:
-				return;
-				break;				
-		}
-		system("cls");
-		}while(option-'0'!=0);
-}
+//
+//void subMenu_coreTraining(){
+//	char option;
+//	do{
+//		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+//   	 	const SMALL_RECT WinSize = {0,0,145,30};
+//    	SetConsoleWindowInfo( hConsole, true, &WinSize);
+//		do{
+//			system("cls");
+//			printf("\t\t   _____ ____  _____  ______   _______ _____            _____ _   _ _____ _   _  _____            _   _          _____  \n");
+//			printf("\t\t  / ____/ __ \\|  __ \\|  ____| |__   __|  __ \\     /\\   |_   _| \\ | |_   _| \\ | |/ ____|          | \\ | |   /\\   |  __ \\ \n");
+//			printf("\t\t | |   | |  | | |__) | |__       | |  | |__) |   /  \\    | | |  \\| | | | |  \\| | |  __   ______  |  \\| |  /  \\  | |__) |\n");
+//			printf("\t\t | |   | |  | |  _  /|  __|      | |  |  _  /   / /\\ \\   | | | . ` | | | | . ` | | |_ | |______| | . ` | / /\\ \\ |  _  / \n");
+//			printf("\t\t | |___| |__| | | \\ \\| |____     | |  | | \\ \\  / ____ \\ _| |_| |\\  |_| |_| |\\  | |__| |          | |\\  |/ ____ \\| | \\ \\ \n");
+//			printf("\t\t  \\_____\\____/|_|  \\_\\______|    |_|  |_|  \\_\\/_/    \\_\\_____|_| \\_|_____|_| \\_|\\_____|          |_| \\_/_/    \\_\\_|  \\_\\\n\n");                                                                                                            
+//			printf("\n\t\t\t\t\t\t Due to copyright issues, the name of the games will be changed\n\n");
+//			printf("\t\t\t\t\t\t\t =======================================\n");
+//			printf("\t\t\t\t\t\t\t| 1. STATION MANAGER                   |\n");
+//			printf("\t\t\t\t\t\t\t| 2. CENSUS SYSTEM                     |\n");
+//			printf("\t\t\t\t\t\t\t| 3. DRAGON BOOK                       |\n");
+//			printf("\t\t\t\t\t\t\t| 0. BACK TO MENU                      |\n");
+//			printf("\t\t\t\t\t\t\t =======================================\n");
+//			printf("\t\t\t\t\t\t\t>> ");
+//			option = getch();
+//			printf("%c\n", option);
+//		}while(option-'0'<0 || option-'0'>7);
+//		switch(option-'0'){
+//			case 1:
+//				stationManager_game();//original name = kereta aPHi
+//				// implements Multiple Linked Lists and Breadth First Transversal
+//				break;
+//			case 2:
+//				censusSystem_game();// original name = The Census Team
+//				// implements hashtable using pearson hash function, implementing separate chaining to handle collisions, and file processing
+//				break;
+//			case 3:
+//				dragonBook_game();// original name = Handler Book
+//				// implements AVL Tree, linked list, padding, accepting key inputs, console manipulation, and modified middle square hashing method
+//				break;
+//			default:
+//				return;
+//				break;				
+//		}
+//		system("cls");
+//		}while(option-'0'!=0);
+//}
 
 void subMenu_universityTraining(){
 	char option;
@@ -308,7 +308,7 @@ void subMenu_aboutThisGame(){
 	system("cls");
 	printf("\n\tThis is a compilation of games created by me (although some of them are finished through some help from friends, mentor, and internet).\n\n");
 	printf("\tIt's purpose is to help me master C programming and for fun (who knows if i want to play them one day)\n\n");
-	printf("\tPlease take note that all of these games are derived from real games that have been created before / from assignments from NAR 21-1\n\n");
+	printf("\tPlease take note that all of these games are derived from real games that have been created before / from assignments from NAR 21-1 (excluding Core Training due to legal issues)\n\n");
 	printf("\t** NAR 21-1 = New Assistant Recruitment 21 - 1 , by Software Laboratory Center, Bina Nusantara University\n\n");
 	printf("\tThat's all, Have Fun!!\n\n");
 	printf("\tPress enter to continue..");
